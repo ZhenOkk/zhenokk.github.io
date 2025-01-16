@@ -1,0 +1,71 @@
+h1{
+	font-family: "Kanit", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	margin: 0.5cm;
+	margin-left: 1px;
+}
+h2{
+	font-family: "Kanit", sans-serif;
+	font-weight: 300;
+	font-style: normal;
+	margin: 0.5cm;
+	margin-left: 1px;
+}
+header{
+	background: #d54930;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position:fixed;
+	top: 0;
+	right: 0;
+	margin-bottom: 0.5cm;
+	left: 0;
+	padding-top: 1px;
+	padding-right: 1px;
+	padding-bottom: 10px;
+	padding-left: 30px;
+	font-style: normal;
+}
+header nav{
+	background: #d54930;
+	display: flex;
+	gap: 30px;
+}
+header nav a{
+	background: #d54930;
+	margin-right: 100px;
+	padding: 15px 15px 15px 15px;
+	display: block;
+}
+header nav a:hover{
+	background: rgb(255, 244, 161);
+	display: block;
+	transform:rotate(5deg);
+}
+
+body{
+	background: rgb(110, 240, 114);
+	position:fixed;
+	top: 125px;
+	font-family: "Kanit", sans-serif;
+}
+
+main {
+	margin: 0.5cm;
+	font-weight: 300;
+	font-style: normal;
+}
+
+footer{
+	background: #d54930;
+	position:fixed;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	padding-top: 15px;
+	padding-right: 1px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+}
