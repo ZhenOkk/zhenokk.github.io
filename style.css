@@ -13,7 +13,7 @@ h2{
 	margin-left: 1px;
 }
 header{
-	background: #d54930;
+	background: rgb(92, 92, 92);
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -29,12 +29,12 @@ header{
 	font-style: normal;
 }
 header nav{
-	background: #d54930;
+	background: rgb(92, 92, 92);
 	display: flex;
 	gap: 30px;
 }
 header nav a{
-	background: #d54930;
+	background: rgb(92, 92, 92);
 	margin-right: 100px;
 	padding: 15px 15px 15px 15px;
 	display: block;
@@ -46,7 +46,7 @@ header nav a:hover{
 }
 
 body{
-	background: rgb(110, 240, 114);
+	background: rgb(255, 244, 161);
 	position:fixed;
 	top: 125px;
 	font-family: "Kanit", sans-serif;
@@ -59,7 +59,7 @@ main {
 }
 
 footer{
-	background: #d54930;
+	background: rgb(92, 92, 92);
 	position:fixed;
 	bottom: 0;
 	right: 0;

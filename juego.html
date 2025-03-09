@@ -7,6 +7,52 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="style.css" />
+		
+		<script>
+				let numero_min = 1;
+				let numero_max = 100;
+				
+				let numero_random = Math.floor(Math.random()*100) + 1;
+				console.log("El num a adivinar es: "+numero_random);
+				
+				let intentos = 0;
+				let info = "Introduce un número entre el "+numero_min+" y el "+numero_max+" para adivinar el número.";
+				
+				function check_numero () 
+				{
+					let resultado = document.getElementById("resultado");
+					
+					let valor = document.getElementById("juego_numero").value;
+					let boton = document.getElementById("boton");
+					
+					if (valor < numero_min) {
+						resultado.value = "El num debe ser 1 o mayor";
+						return;
+					}
+					else if (valor > numero_max) {
+						resultado.value = "El num debe ser 100 o menor";
+						return;
+					}
+					
+					intentos++;
+					document.getElementById("contador").innerText = "Intentos: " +intentos;
+					
+					let text = "";
+					
+					if (valor > numero_random) {
+						text = "El número a adivinar es menor que "+valor;
+					}
+					else if (valor < numero_random) {
+						text = "El número a adivinar es mayor que "+valor;
+					}
+					else {
+						text = "¡Lo has acertado!";
+						 boton.disabled = true;
+					}
+					console.log(text);
+					resultado.value = text;
+				}
+			</script>
 	</head>
 	<main>
 		<header>
@@ -17,8 +63,15 @@
 		</header>
 		
 		<body>
-			<p>Aqui crearemos un juego con JavaScript mas adelante:</p>
-			<img src="https://snakegame.org/assets/img/snake-game-how-to-3.png">
+			<form>
+				<h3>Adivina el número</h3>
+				<p id="contador">Intentos: 0</p>
+				<p id="info">Introduce un número entre el 1 y el 100 para adivinar el número.</p>
+				<p>Número <input type="number" id="juego_numero" name="numero"/></p>
+				
+				<p><output id="resultado"> Introduce el número en el campo de texto</p>
+				<p><input type="button" id="boton" value="¡Adivina!" onclick="check_numero();" /></p>
+			</form>
 		</body>
 		
 		<footer>
