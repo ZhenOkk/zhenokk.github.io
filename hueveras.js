@@ -38,11 +38,32 @@ let huevo_current = 0;
 let huevo_shadow;
 let egg_scale = 0.5; 
 
-//Cargará imagenes:
+let music = {
+	background: null,
+	game_over: null
+};
+
+let fx = {
+	mouseclick: null,
+	correct: null,
+	incorrect: null
+};
+
+//Game over text:
+let gameover_text;
+
+
+//Cargará imagenes y audios:
 function precarga() {
 	this.load.image('grass_bg', 'granja.png');
 	this.load.image('huevera', 'huevera.png');
 	this.load.image('huevo', 'huevo_b.png');
+	
+	this.load.audio('background_music', 'sounds/background.mp3');	//musica gameplay
+	this.load.audio('game_over_music', 'sounds/gameover.wav');	//musica gameover
+	this.load.audio('mouseclick_fx', 'sounds/grabItem.wav');	//sonido agarrar huevo
+	this.load.audio('correct', ['sounds/true.wav']);   // Sonido correcto
+	this.load.audio('incorrect', ['sounds/false.wav']); // Sonido incorrecto
 }
 
 //Mostrará en pantalla:
@@ -94,6 +115,7 @@ function crea() {
 		huevo_tmp.on('pointerdown', function () {
 			this.falling = false;
 			huevo_shadow.setPosition(this.x + 8, this.y + 8).setScale(egg_scale);
+			fx.mouseclick.play();
 			this.setScale(egg_scale * 1.3);
 		});
 
@@ -122,8 +144,10 @@ function crea() {
 
 		if (correct) {
 			countdown += 5;
+			fx.correct.play();
 		} else if (correct === false) {
 			countdown -= 5;
+			fx.incorrect.play();
 		}
 
 		object.destroy();
@@ -131,10 +155,24 @@ function crea() {
 	});
 
 	countdown_text = this.add.text(700, 16, countdown, { "fontSize": 48, "fontStyle": "bold" });
+	
+	//Texto para el game over:
+	gameover_text = this.add.text(9999, 9999, "GAME OVER", { "fontSize": 64, "fontStyle": "bold"});
+
+	music.background = this.sound.add('background_music', { loop: true, volume: 0.25 });
+	music.background.play();
+
+	music.game_over = this.sound.add('game_over_music');
+	fx.mouseclick = this.sound.add('mouseclick_fx');
+	fx.correct = this.sound.add('correct');   // Cargar sonido correcto
+	fx.incorrect = this.sound.add('incorrect'); // Cargar sonido incorrecto
 }
 
 //Actualizará por cada frame:
 function actualiza() {
+	if (countdown === 10) {
+		music.background.rate = 1.25;
+	}
 
 	for (let i = 0; i < huevos.length; i++) {
 		if (huevos[i].falling) {
@@ -161,13 +199,19 @@ countdown_interval = setInterval(function () {
 }, 1000);
 
 //Al finalizar el juego se desactivará todo:
-function finalizarJuego(scene) {
+function finalizarJuego() {
 	console.log("Game Over");
+
+	// Detener música y poner la del gameOver
+	music.background.stop();
+	music.game_over.play();
 
 	// Detener el contador
 	clearInterval(countdown_interval);
 	//Detener la caida de los huevos
 	clearTimeout(huevos_interval);
+	
+	gameover_text.setPosition(canvas_w/2-100, canvas_h/2-50);
 }
 
 //Detecta si pueden caer más huevos y los cuenta siguiendo esa lógica
